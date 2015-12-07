@@ -28,25 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nupR = new System.Windows.Forms.NumericUpDown();
+            this.nupN = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nupR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nupN)).BeginInit();
             this.SuspendLayout();
             // 
             // panelBottom
             // 
-            this.panelBottom.Controls.Add(this.numericUpDown1);
+            this.panelBottom.Controls.Add(this.label2);
+            this.panelBottom.Controls.Add(this.label1);
+            this.panelBottom.Controls.Add(this.nupN);
+            this.panelBottom.Controls.Add(this.nupR);
             this.panelBottom.Location = new System.Drawing.Point(0, 451);
             this.panelBottom.Size = new System.Drawing.Size(782, 100);
             this.panelBottom.Controls.SetChildIndex(this.seriesListBox, 0);
-            this.panelBottom.Controls.SetChildIndex(this.numericUpDown1, 0);
+            this.panelBottom.Controls.SetChildIndex(this.nupR, 0);
+            this.panelBottom.Controls.SetChildIndex(this.nupN, 0);
+            this.panelBottom.Controls.SetChildIndex(this.label1, 0);
+            this.panelBottom.Controls.SetChildIndex(this.label2, 0);
             // 
-            // numericUpDown1
+            // nupR
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(406, 6);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.nupR.Location = new System.Drawing.Point(406, 35);
+            this.nupR.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.nupR.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupR.Name = "nupR";
+            this.nupR.Size = new System.Drawing.Size(120, 20);
+            this.nupR.TabIndex = 2;
+            this.nupR.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupR.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // nupN
+            // 
+            this.nupN.Location = new System.Drawing.Point(532, 35);
+            this.nupN.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.nupN.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupN.Name = "nupN";
+            this.nupN.Size = new System.Drawing.Size(120, 20);
+            this.nupN.TabIndex = 3;
+            this.nupN.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nupN.ValueChanged += new System.EventHandler(this.nupN_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(412, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(10, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "r";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(537, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "n";
             // 
             // Form1
             // 
@@ -56,7 +123,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panelBottom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.panelBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nupN)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,7 +133,10 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nupR;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nupN;
     }
 }
 
