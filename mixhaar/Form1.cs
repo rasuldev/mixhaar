@@ -38,7 +38,7 @@ namespace mixhaar
                 plotHaar.DiscreteFunction = new DiscreteFunction2D(Functions.Function.Haar(n - r), 0, 1, 1000);
                 plotHaar.Refresh();
             }
-            plotMix.DiscreteFunction = new DiscreteFunction2D(Functions.Function.MixedHaar(r, n), 0, 1, 1000);
+            plotMix.DiscreteFunction = new DiscreteFunction2D(Functions.Function.MixedHaar2(r, n), 0, 1, 1000);
             plotMix.Refresh();
         }
 
