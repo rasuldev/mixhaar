@@ -1,6 +1,6 @@
 ﻿namespace mixhaar
 {
-    partial class Form1
+    partial class MixHaarPlots
     {
         /// <summary>
         /// Required designer variable.
@@ -32,6 +32,7 @@
             this.nupN = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupN)).BeginInit();
@@ -39,6 +40,7 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.button1);
             this.panelBottom.Controls.Add(this.label2);
             this.panelBottom.Controls.Add(this.label1);
             this.panelBottom.Controls.Add(this.nupN);
@@ -50,6 +52,7 @@
             this.panelBottom.Controls.SetChildIndex(this.nupN, 0);
             this.panelBottom.Controls.SetChildIndex(this.label1, 0);
             this.panelBottom.Controls.SetChildIndex(this.label2, 0);
+            this.panelBottom.Controls.SetChildIndex(this.button1, 0);
             // 
             // nupR
             // 
@@ -115,12 +118,22 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "n";
             // 
-            // Form1
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(406, 65);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // MixHaarPlots
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 551);
-            this.Name = "Form1";
+            this.Name = "MixHaarPlots";
             this.Text = "Form1";
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
@@ -137,6 +150,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nupN;
+        private System.Windows.Forms.Button button1;
     }
 }
 

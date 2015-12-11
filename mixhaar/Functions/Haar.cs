@@ -2,10 +2,134 @@
 using mathlib;
 using static System.Math;
 
+
 namespace mixhaar.Functions
 {
     public static class Function
     {
+        public static double Tcheb(int k, double x)
+        {
+            if (k == 0) return 1;
+            if (k == 1) return x;
+
+            return 2*x*Tcheb(k - 1, x) - Tcheb(k - 2, x);
+            //return Cos(k * Acos(x));
+        }
+
+
+
+        public static double MixTcheb(int k, double x)
+        {
+            if (k < 3) return 0;
+
+            var v = Tcheb(k + 2, x) / (4 * (k + 1) * (k + 2));
+            v -= Tcheb(k, x) / (2 * (k * k - 1));
+            v += Tcheb(k - 2, x) / (4 * (k - 1) * (k - 2));
+            v -= Pow(-1, k) * ((1 + x) / (Pow(k, 2) - 1) + 3.0 / ((k + 2) * (k + 1) * (k - 2) * (k - 1)));
+            return v;
+        }
+
+        /*public static double MixTcheb(int k, double x)
+        {
+            if (k < 3) return 0;
+
+            var v = Tcheb(k + 2, x) / (4 * (k + 1) * (k + 2));
+            v -= Tcheb(k, x) / (2 * (k * k - 1));
+            v += Tcheb(k - 2, x) / (4 * (k - 1) * (k - 2));
+            v -= Pow(-1, k) * ((1 + x) / (Pow(k, 2) - 1) + 3.0 / ((k + 2) * (k + 1) * k * (k - 1)));
+            return v;
+        }*/
+
+        /*public static double MixTcheb(int k, double x)
+        {
+            if (k < 3) return 0;
+            int sgn;
+
+            if (k % 2 == 0) { sgn = 1; }
+            else { sgn = -1; }
+
+            var v = Tcheb(k + 2, x) / (4 * (k + 1) * (k + 2));
+            v -= Tcheb(k, x) / (2 * (k * k - 1));
+            v += Tcheb(k - 2, x) / (4 * (k - 1) * (k - 2));
+            v -= sgn *
+                 (
+                     (1 + x)/(k*k - 1) + 3.0/((k*k - 4)*(k*k - 1))
+                 );
+            return v;
+        }*/
+
+
+        public static double[] uniformGrid(double a, double b, int N)
+        {
+            double[] grid = new double[N + 1];
+            double h = (b - a) / N;
+            grid[0] = a;
+            for (int i = 1; i <= N; i++)
+            {
+                grid[i] = grid[i - 1] + h;
+            }
+            return grid;
+        }
+
+        public static double[][] Tchebs(int n, double[] x)
+        {
+            int N = x.Length;
+            double[][] T = new double[n + 1][];
+            for (int i = 0; i <= n; i++)
+            {
+                T[i] = new double[N];
+            }
+
+            for (int i = 0; i < N; i++) { T[0][i] = 1.0; }
+            if (n == 0) return T;
+            for (int i = 0; i < N; i++) { T[1][i] = x[i]; }
+            if (n == 1) return T;
+
+            for (int k = 2; k <= n; k++)
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    T[k][i] = 2 * x[i] * T[k - 1][i] - T[k - 2][i];
+                }
+            }
+
+            return T;
+        }
+
+
+        public static double[] MixTcheb(int k, int N = 200)
+        {
+            double[] x = uniformGrid(-1, 1, N);
+            double[][] T = Tchebs(k + 2, x);
+            double[] v = new double[N + 1];
+
+            if (k < 3)
+            {
+                for (int i = 0; i <= N; i++) { v[i] = 0.0; }
+                return v;
+            }
+
+            int sgn;
+
+            if (k % 2 == 0) { sgn = 1; }
+            else { sgn = -1; }
+
+            for (int i = 0; i <= N; i++)
+            {
+                v[i] = T[k + 2][i] / (4.0 * (k + 1) * (k + 2));
+                v[i] -= T[k][i] / (2.0 * (k * k - 1));
+                v[i] += T[k - 2][i] / (4.0 * (k - 1) * (k - 2));
+                v[i] -= sgn *
+                     (
+                         (1 + x[i]) / (k * k - 1) + 3.0 / ((k * k - 4.0) * (k * k - 1.0))
+                     );
+            }
+            return v;
+        }
+
+
+
+
         public static Func<double, double> Haar(int n)
         {
             if (n == 1) return x => 1;
@@ -84,7 +208,7 @@ namespace mixhaar.Functions
                 return v * pow2k2 / rFact;
             };
         }
+
+
     }
-
-
 }
