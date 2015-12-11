@@ -1,4 +1,5 @@
 ﻿using System;
+using static mixhaar.Functions.Function;
 
 namespace mixhaar
 {
@@ -22,9 +23,22 @@ namespace mixhaar
             this.y1 = y1;
         }
 
-        //public double[] Solve()
-        //{
-            
-        //}
+        public double[] Solve(double[] nodes, int n)
+        {
+            var m = nodes.Length;
+            var A = new double[m, n];
+            var B = new double[m];
+            for (int j = 0; j < m; j++)
+            {
+                for (int k = 0; k <= n; k++)
+                {
+                    var t = nodes[j];
+                    A[j, k] = Haar(k)(t) + a * MixedHaar2(1, k + 1)(t) + b * MixedHaar2(2, k + 2)(t);
+                }
+                B[j] = f(nodes[j]) - a * y1 - b * (y0 + y1 * nodes[j]);
+            }
+
+            return mathlib.LinearSystem.Solve(A, B);
+        }
     }
 }

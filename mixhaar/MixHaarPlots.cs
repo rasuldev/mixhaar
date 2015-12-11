@@ -64,22 +64,5 @@ namespace mixhaar
             Draw((int)nupR.Value, (int)nupN.Value);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            var k = 155;
-            var f = 1.0/(4*(k + 2)*(k + 1));
-            f -= 1.0/(2*(k + 1)*(k - 1));
-            f += 1.0/(4*(k - 1)*(k - 2));
-
-            var g = 3.0 / ((k+2)*(k+1)*(k-1)*(k-2));
-
-
-            Console.WriteLine(f);
-            Console.WriteLine(g);
-
-
-
-
-        }
     }
 }
