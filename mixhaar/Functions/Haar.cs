@@ -130,6 +130,7 @@ namespace mixhaar.Functions
 
 
 
+        // n >= 1
         public static Func<double, double> Haar(int n)
         {
             if (n == 1) return x => 1;
@@ -159,7 +160,7 @@ namespace mixhaar.Functions
 
             var c = 1 / Factorial(r - 1);
             var haarFunc = Haar(n - r);
-            return x => c * Integrals.Rectangular(t => haarFunc(t), 0, x, 1025, Integrals.RectType.Center);
+            return x => c * Integrals.Rectangular(t => Pow(x-t,r-1)*haarFunc(t), 0, x, 10000, Integrals.RectType.Center);
         }
 
         public static int Factorial(int n)

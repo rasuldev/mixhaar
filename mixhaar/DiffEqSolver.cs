@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using static mixhaar.Functions.Function;
 
 namespace mixhaar
@@ -23,22 +25,56 @@ namespace mixhaar
             this.y1 = y1;
         }
 
-        public double[] Solve(double[] nodes, int n)
+
+        /// <summary>
+        /// Constructs matrix A and vector B for linear system of equations Ax=B
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name="n"></param>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        public void ConstructMatrix(double[] nodes, int n, out double[,] A, out double[] B)
         {
             var m = nodes.Length;
-            var A = new double[m, n];
-            var B = new double[m];
+            A = new double[m, n];
+            B = new double[m];
             for (int j = 0; j < m; j++)
             {
-                for (int k = 0; k <= n; k++)
+                for (int k = 0; k < n; k++)
                 {
                     var t = nodes[j];
-                    A[j, k] = Haar(k)(t) + a * MixedHaar2(1, k + 1)(t) + b * MixedHaar2(2, k + 2)(t);
+                    A[j, k] = Haar(k+1)(t) + a * MixedHaar2(1, k+1 + 1)(t) + b * MixedHaar2(2, k+1 + 2)(t);
                 }
                 B[j] = f(nodes[j]) - a * y1 - b * (y0 + y1 * nodes[j]);
             }
+        }
 
-            return mathlib.LinearSystem.Solve(A, B);
+        public Func<double, double> Solve(double[] nodes, int n)
+        {
+            double[,] A;
+            double[] B;
+            ConstructMatrix(nodes, n, out A, out B);
+
+            var yk = mathlib.LinearSystem.Solve(A, B);
+            return MakeFromCoeffs(y0, y1, yk);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="coeffs"></param>
+        /// <returns></returns>
+        private static Func<double, double> MakeFromCoeffs(double y0, double y1, double[] coeffs)
+        {
+            var n = coeffs.Length;
+            var haar2 = new Func<double, double>[n];
+            for (int k = 0; k < n; k++)
+            {
+                haar2[k] = MixedHaar2(2, k + 2);
+            }
+
+            return t =>
+                y0 + y1 * t + coeffs.Select((yk, k) => yk * haar2[k](t)).Sum();
         }
     }
 }

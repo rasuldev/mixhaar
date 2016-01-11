@@ -41,14 +41,14 @@ namespace mixhaar
 
             if (n - r >= 1)
             {
+                plotTcheb.DiscreteFunction = new DiscreteFunction2D(Functions.Function.Haar(n), 0, 1, N);
                 //plotTcheb.DiscreteFunction = new DiscreteFunction2D(x=> Functions.Function.Tcheb(n, x), -1, 1, N);
-                
-                plotTcheb.DiscreteFunction = new DiscreteFunction2D(x, y0);
+                //plotTcheb.DiscreteFunction = new DiscreteFunction2D(x, y0);
                 plotTcheb.Refresh();
             }
+            plotMix.DiscreteFunction = new DiscreteFunction2D(Functions.Function.MixedHaar2(r, n), 0, 1, N);
             //plotMix.DiscreteFunction = new DiscreteFunction2D(x => Functions.Function.MixTcheb(n, x), -1, 1, N);
-
-            plotMix.DiscreteFunction = new DiscreteFunction2D(x, y1);
+            //plotMix.DiscreteFunction = new DiscreteFunction2D(x, y1);
             plotMix.Refresh();
 
             //Console.WriteLine(Function.Tcheb(n, -1));

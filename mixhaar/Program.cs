@@ -17,6 +17,7 @@ namespace mixhaar
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DiffEq());
+            //Application.Run(new MixHaarPlots());
         }
     }
 }
