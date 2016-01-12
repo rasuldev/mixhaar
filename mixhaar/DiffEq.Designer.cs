@@ -75,7 +75,7 @@
             this.nupNodesCount.Size = new System.Drawing.Size(120, 20);
             this.nupNodesCount.TabIndex = 0;
             this.nupNodesCount.Value = new decimal(new int[] {
-            100,
+            2,
             0,
             0,
             0});
@@ -116,7 +116,7 @@
             this.nupCoeffsCount.Size = new System.Drawing.Size(120, 20);
             this.nupCoeffsCount.TabIndex = 1;
             this.nupCoeffsCount.Value = new decimal(new int[] {
-            100,
+            3,
             0,
             0,
             0});

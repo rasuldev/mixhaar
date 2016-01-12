@@ -70,7 +70,7 @@ namespace mixhaar
             var haar2 = new Func<double, double>[n];
             for (int k = 0; k < n; k++)
             {
-                haar2[k] = MixedHaar2(2, k + 2);
+                haar2[k] = MixedHaar2(2, k + 1 + 2);
             }
 
             return t =>

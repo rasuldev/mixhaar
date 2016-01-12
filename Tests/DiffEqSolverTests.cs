@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Tests
 {
     [TestFixture]
-    public class DifEqSolverTests
+    public class DiffEqSolverTests
     {
         [Test]
         public void ConstructMatrixTest()

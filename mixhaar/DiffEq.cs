@@ -33,11 +33,11 @@ namespace mixhaar
 
         public void Init()
         {
-            var a = 3;
+            var a = 1;
             var b = 2;
-            Func<double, double> f = t => 6*t*t*t + 25*t*t + 12*t - 2;
+            Func<double, double> f = t => 1 + t + t*t;
 
-            Func<double, double> exactSolution = t => 3 * t * t * t - t * t;
+            Func<double, double> exactSolution = t => t*t/2;
 
             plotExact.DiscreteFunction = new DiscreteFunction2D(exactSolution,SegmentStart, SegmentEnd, 1000);
             plotExact.Refresh();
