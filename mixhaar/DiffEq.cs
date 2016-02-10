@@ -35,28 +35,28 @@ namespace mixhaar
         {
             var a = 1;
             var b = 2;
-            Func<double, double> f = t => 1 + t + t*t;
+            Func<double, double> f = t => 1 + t + t * t;
 
-            Func<double, double> exactSolution = t => t*t/2;
+            Func<double, double> exactSolution = t => t * t / 2;
 
-            plotExact.DiscreteFunction = new DiscreteFunction2D(exactSolution,SegmentStart, SegmentEnd, 1000);
+            plotExact.DiscreteFunction = new DiscreteFunction2D(exactSolution, SegmentStart, SegmentEnd, 1000);
             plotExact.Refresh();
-            solver = new DiffEqSolver(x=>a,x=>b,f,0,0);
+            solver = new DiffEqSolver(x => 1, x => a, x => b, f, 0, 0);
         }
 
         public Func<double, double> Solve()
         {
             int nodesCount = (int)nupNodesCount.Value;
             int coeffsCount = (int)nupCoeffsCount.Value;
-            
-            var nodes = Range(0, nodesCount).Select(j => SegmentStart + j*(SegmentEnd - SegmentStart)/(nodesCount-1)).ToArray();
+
+            var nodes = Range(0, nodesCount).Select(j => SegmentStart + j * (SegmentEnd - SegmentStart) / (nodesCount - 1)).ToArray();
             return solver.Solve(nodes, coeffsCount);
         }
 
         public void Draw()
         {
             var numSolution = Solve();
-            plotNum.DiscreteFunction = new DiscreteFunction2D(numSolution,SegmentStart,SegmentEnd,1000);
+            plotNum.DiscreteFunction = new DiscreteFunction2D(numSolution, SegmentStart, SegmentEnd, 1000);
             plotNum.Refresh();
         }
 

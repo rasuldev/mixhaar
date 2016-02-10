@@ -15,7 +15,7 @@ namespace Tests
             var b = 2;
             Func<double, double> f = t => 6 * t * t * t + 25 * t * t + 12 * t - 2;
 
-            var solver = new DiffEqSolver(x => a, x => b, f, 0, 0);
+            var solver = new DiffEqSolver(x => 1, x => a, x => b, f, 0, 0);
 
             int n = 3;
             double[] nodes = { 0, 0.5, 1 };
