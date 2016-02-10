@@ -41,7 +41,7 @@ namespace mixhaar
 
             plotExact.DiscreteFunction = new DiscreteFunction2D(exactSolution,SegmentStart, SegmentEnd, 1000);
             plotExact.Refresh();
-            solver = new DiffEqSolver(a,b,f,0,0);
+            solver = new DiffEqSolver(x=>a,x=>b,f,0,0);
         }
 
         public Func<double, double> Solve()

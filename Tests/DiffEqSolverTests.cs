@@ -15,10 +15,10 @@ namespace Tests
             var b = 2;
             Func<double, double> f = t => 6 * t * t * t + 25 * t * t + 12 * t - 2;
 
-            var solver = new DiffEqSolver(a, b, f, 0, 0);
+            var solver = new DiffEqSolver(x => a, x => b, f, 0, 0);
 
             int n = 3;
-            double[] nodes = {0, 0.5, 1};
+            double[] nodes = { 0, 0.5, 1 };
 
             double[,] A;
             double[] B;
@@ -32,7 +32,7 @@ namespace Tests
             Assert.AreEqual(n, A.GetLength(1));
             Assert.AreEqual(nodes.Length, B.Length);
 
-            Assert.AreEqual(new[]{f(0),f(0.5),f(1)}, B);
+            Assert.AreEqual(new[] { f(0), f(0.5), f(1) }, B);
         }
     }
 }

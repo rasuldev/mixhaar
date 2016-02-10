@@ -7,7 +7,8 @@ namespace mixhaar
 {
     public class DiffEqSolver
     {
-        private double a, b, y0, y1;
+        private Func<double, double> a, b;
+        double y0, y1;
         private Func<double, double> f;
 
         /// <summary>
@@ -16,7 +17,7 @@ namespace mixhaar
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <param name="f"></param>
-        public DiffEqSolver(double a, double b, Func<double, double> f, double y0, double y1)
+        public DiffEqSolver(Func<double, double> a, Func<double, double> b, Func<double, double> f, double y0, double y1)
         {
             this.a = a;
             this.b = b;
@@ -40,12 +41,12 @@ namespace mixhaar
             B = new double[m];
             for (int j = 0; j < m; j++)
             {
+                var t = nodes[j];
                 for (int k = 0; k < n; k++)
                 {
-                    var t = nodes[j];
-                    A[j, k] = Haar(k+1)(t) + a * MixedHaar2(1, k+1 + 1)(t) + b * MixedHaar2(2, k+1 + 2)(t);
+                    A[j, k] = Haar(k + 1)(t) + a(t) * MixedHaar2(1, k + 1 + 1)(t) + b(t) * MixedHaar2(2, k + 1 + 2)(t);
                 }
-                B[j] = f(nodes[j]) - a * y1 - b * (y0 + y1 * nodes[j]);
+                B[j] = f(nodes[j]) - a(t) * y1 - b(t) * (y0 + y1 * t);
             }
         }
 
