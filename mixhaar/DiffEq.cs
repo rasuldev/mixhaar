@@ -33,15 +33,46 @@ namespace mixhaar
 
         public void Init()
         {
-            var a = 1;
-            var b = 2;
-            Func<double, double> f = t => 1 + t + t * t;
-
-            Func<double, double> exactSolution = t => t * t / 2;
+            Func<double, double> a2, a1, a0, f, exactSolution;
+            double y0, y1;
+            Example3(out a2, out a1, out a0, out f, out exactSolution, out y0, out y1);
 
             plotExact.DiscreteFunction = new DiscreteFunction2D(exactSolution, SegmentStart, SegmentEnd, 1000);
             plotExact.Refresh();
-            solver = new DiffEqSolver(x => 1, x => a, x => b, f, 0, 0);
+            solver = new DiffEqSolver(a2, a1, a0, f, 0, 0);
+        }
+
+        public void Example1(out Func<double, double> a2, out Func<double, double> a1, out Func<double, double> a0,
+            out Func<double, double> f, out Func<double, double> exactSolution, out double y0, out double y1)
+        {
+            a2 = x => 1;
+            a1 = x => 1;
+            a0 = x => 2;
+            f = t => 1 + t + t * t;
+            exactSolution = t => t * t / 2;
+            y0 = y1 = 0;
+        }
+
+        public void Example2(out Func<double, double> a2, out Func<double, double> a1, out Func<double, double> a0,
+            out Func<double, double> f, out Func<double, double> exactSolution, out double y0, out double y1)
+        {
+            a2 = t => 1;
+            a1 = t => t;
+            a0 = t => 1 - t;
+            f = t => 2 + 3 * t * t - t * t * t;
+            exactSolution = t => t * t;
+            y0 = y1 = 0;
+        }
+
+        public void Example3(out Func<double, double> a2, out Func<double, double> a1, out Func<double, double> a0,
+            out Func<double, double> f, out Func<double, double> exactSolution, out double y0, out double y1)
+        {
+            a2 = t => 1;
+            a1 = t => Sqrt(t);
+            a0 = t => Sin(t);
+            f = t => 6 * t + Pow(t, 3) * Sin(t) + 3 * Pow(t, 2.5);
+            exactSolution = t => t * t * t;
+            y0 = y1 = 0;
         }
 
         public Func<double, double> Solve()
