@@ -75,6 +75,17 @@ namespace mixhaar
             y0 = y1 = 0;
         }
 
+        public void Example4(out Func<double, double> a2, out Func<double, double> a1, out Func<double, double> a0,
+            out Func<double, double> f, out Func<double, double> exactSolution, out double y0, out double y1)
+        {
+            a2 = t => 1;
+            a1 = t => Sqrt(t);
+            a0 = t => Sin(t);
+            f = t => 6 * t + Pow(t, 3) * Sin(t) + 3 * Pow(t, 2.5);
+            exactSolution = t => t * t * t;
+            y0 = y1 = 0;
+        }
+
         public Func<double, double> Solve()
         {
             int nodesCount = (int)nupNodesCount.Value;
